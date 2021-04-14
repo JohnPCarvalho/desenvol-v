@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/JohnPCarvalho/desenvol-v/backend/controllers"
 	"github.com/gorilla/mux"
 )
 

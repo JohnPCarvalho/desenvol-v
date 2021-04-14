@@ -30,13 +30,13 @@ func (t *Travel) CreateTravel() *Travel {
 	return t
 }
 
-func getAllTravels() []Travel {
+func GetAllTravels() []Travel {
 	var Travels []Travel
 	db.Find(&Travels)
 	return Travels
 }
 
-func getTravelById(Id int64) (*Travel, *gorm.DB) {
+func GetTravelById(Id int64) (*Travel, *gorm.DB) {
 	var getTravel Travel
 	db := db.Where("ID = ?", Id).Find(&getTravel)
 	return &getTravel, db
