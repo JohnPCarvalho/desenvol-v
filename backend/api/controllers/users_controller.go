@@ -8,8 +8,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/JohnPCarvalho/desenvol-v/backend/models"
+	"github.com/JohnPCarvalho/desenvol-v/backend/api/auth"
+	"github.com/JohnPCarvalho/desenvol-v/backend/api/models"
 	"github.com/gorilla/mux"
+
+	"github.com/JohnPCarvalho/desenvol-v/backend/api/responses"
+	"github.com/JohnPCarvalho/desenvol-v/backend/api/utils/formaterror"
 )
 
 func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -43,18 +47,11 @@ func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusCreated, userCreated)
 }
 
-//para implementar a busca inicial dos usuarios do sistema, podera haver um campo a mais para determinar o parametro de busca, como no caso do nosso sistema,
-//jogos e distancia como parametros. O sistema deve suportar jogos opcionalmente e distancia como sendo obrigatorio
-
 func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request) {
 
-	loggedId, error := strconv.Atoi(r.Header.Get("user"))
-	if error != nil {
-		fmt.Printf("%s", error)
-	}
-
 	user := models.User{}
-	users, err := user.FindUsersByIdLogged(server.DB, loggedId)
+
+	users, err := user.FindAllUsers(server.DB)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
