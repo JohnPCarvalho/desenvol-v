@@ -26,15 +26,15 @@ func (t *Travel) Prepare() {
 func (t * Travel) Validate() error {
 
 	if t.TravelledKm == 0 {
-		return errors.new("Required travelled km")
+		return errors.New("Required travelled km")
 	}
 
 	if t.LiterSpent == 0 {
-		return errors.new("Required travelled km")
+		return errors.New("Required travelled km")
 	}
 
 	if t.PricePerLiter == 0 {
-		return errors.new("Required travelled km")
+		return errors.New("Required travelled km")
 	}
 
 	return nil
@@ -105,7 +105,7 @@ func (t *Travel) UpdateATravel(db *gorm.DB) (*Travel, error) {
 	return t, nil
 }
 
-func (p *Travel) DeleteATravel(db *gorm.DB, pid uint64, uid uint32) (int64, error) {
+func (p *Travel) DeleteATravel(db *gorm.DB, pid uint64, uid uint64) (int64, error) {
 
 	db = db.Debug().Model(&Travel{}).Where("id = ? and author_id = ?", pid, uid).Take(&Travel{}).Delete(&Travel{})
 

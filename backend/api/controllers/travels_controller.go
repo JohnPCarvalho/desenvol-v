@@ -44,17 +44,17 @@ func (server *Server) CreateTravel(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 		return
 	}
-	TravelCreated, err := Travell.SaveTravel(server.DB)
+	TravelCreated, err := Travel.SaveTravel(server.DB)
 	if err != nil {
 		formattedError := formaterror.FormatError(err.Error())
 		responses.ERROR(w, http.StatusInternalServerError, formattedError)
 		return
 	}
-	w.Header().Set("Lacation", fmt.Sprintf("%s%s/%d", r.Host, r.URL.Path, TravellCreated.ID))
-	responses.JSON(w, http.StatusCreated, TravellCreated)
+	w.Header().Set("Lacation", fmt.Sprintf("%s%s/%d", r.Host, r.URL.Path, TravelCreated.ID))
+	responses.JSON(w, http.StatusCreated, TravelCreated)
 }
 
-func (server *Server) GetTravells(w http.ResponseWriter, r *http.Request) {
+func (server *Server) GetTravels(w http.ResponseWriter, r *http.Request) {
 
 	Travell := models.Travel{}
 
@@ -66,7 +66,7 @@ func (server *Server) GetTravells(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusOK, Travells)
 }
 
-func (server *Server) GetTravell(w http.ResponseWriter, r *http.Request) {
+func (server *Server) GetTravel(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
 	tid, err := strconv.ParseUint(vars["id"], 10, 64)
@@ -76,7 +76,7 @@ func (server *Server) GetTravell(w http.ResponseWriter, r *http.Request) {
 	}
 	Travel := models.Travel{}
 
-	TravelReceived, err := Travel.FindTravellByID(server.DB, tid)
+	TravelReceived, err := Travel.FindTravelByID(server.DB, tid)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
@@ -111,7 +111,7 @@ func (server *Server) UpdateTravel(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// If a user attempt to update a Travel not belonging to him
-	if uid != Travel.AuthorID {
+	if uid != Travel.ID {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
@@ -131,7 +131,7 @@ func (server *Server) UpdateTravel(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Also check if the request user id is equal to the one gotten from token
-	if uid != TravelUpdate.AuthorID {
+	if uid != TravelUpdate.ID {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
@@ -174,19 +174,19 @@ func (server *Server) DeleteTravel(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check if the Travel exist
-	Travel := models.Travell{}
-	err = server.DB.Debug().Model(models.Travell{}).Where("id = ?", tid).Take(&Travell).Error
+	Travel := models.Travel{}
+	err = server.DB.Debug().Model(models.Travel{}).Where("id = ?", tid).Take(&Travel).Error
 	if err != nil {
 		responses.ERROR(w, http.StatusNotFound, errors.New("Unauthorized"))
 		return
 	}
 
 	// Is the authenticated user, the owner of this Travell?
-	if uid != Travell.AuthorID {
+	if uid != Travel.ID {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
-	_, err = Travell.DeleteATravell(server.DB, tid, uid)
+	_, err = Travel.DeleteATravel(server.DB, tid, uid)
 	if err != nil {
 		responses.ERROR(w, http.StatusBadRequest, err)
 		return
