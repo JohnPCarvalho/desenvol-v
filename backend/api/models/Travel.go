@@ -11,7 +11,7 @@ type Travel struct {
 	ID        			uint64    `gorm:"primary_key;auto_increment" json:"id"`
 	TravelledKm     float32   `json:"travelledkm"`
 	LiterSpent			float32		`json:"literSpent"`
-	PricePerLiter		float32		`json:literSpent`
+	PricePerLiter		float32		`json:priceperliter`
 	CheckoutDate		time.Time	`json:checkout`
 	CreatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
