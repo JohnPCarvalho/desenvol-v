@@ -2,23 +2,26 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
 )
 
 type Travel struct {
-	ID        			uint64    `gorm:"primary_key;auto_increment" json:"id"`
+	ID        			uint64    `gorm:"primary_key;auto_increment"`
 	TravelledKm     float32   `json:"travelledkm"`
 	LiterSpent			float32		`json:"literSpent"`
-	PricePerLiter		float32		`json:priceperliter`
-	CheckoutDate		time.Time	`json:checkout`
+	PricePerLiter		float32		`json:"priceperliter"`
+	//DriverID
+	CheckoutDate		time.Time	`gorm:"default:CURRENT_TIMESTAMP" json:"checkout"`
 	CreatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
 func (t *Travel) Prepare() {
 	t.ID = 0
+	t.CheckoutDate = time.Now()
 	t.CreatedAt = time.Now()
 	t.UpdatedAt = time.Now()
 }
@@ -26,15 +29,19 @@ func (t *Travel) Prepare() {
 func (t * Travel) Validate() error {
 
 	if t.TravelledKm == 0 {
-		return errors.New("Required travelled km")
+		return errors.New("required travelled km")
 	}
 
 	if t.LiterSpent == 0 {
-		return errors.New("Required travelled km")
+		return errors.New("required liter spent")
 	}
 
 	if t.PricePerLiter == 0 {
-		return errors.New("Required travelled km")
+		return errors.New("required price per liter")
+	}
+
+	if t.CheckoutDate.IsZero() {
+		return errors.New("empty date")
 	}
 
 	return nil
@@ -43,10 +50,13 @@ func (t * Travel) Validate() error {
 func (t * Travel) SaveTravel(db *gorm.DB) (*Travel, error) {
 	var err error
 	err = db.Debug().Model(&Travel{}).Create(&t).Error
+	fmt.Print("Tentou criar \n")
 	if err != nil {
+		fmt.Print("Returned in the first call \n")
 		return &Travel{}, err
 	}
 	if t.ID != 0 {
+		fmt.Print("deu erro no t.id = 0 \n")
 		err = db.Debug().Model(&User{}).Where("id = ?", t.ID).Take(&t.ID).Error
 		if err != nil {
 			return &Travel{}, err
