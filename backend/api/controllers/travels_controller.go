@@ -26,6 +26,7 @@ func (server *Server) CreateTravel(w http.ResponseWriter, r *http.Request) {
 	Travel := models.Travel{}
 	err = json.Unmarshal(body, &Travel)
 	if err != nil {
+		fmt.Fprintf(w, "erro1")
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
@@ -36,21 +37,25 @@ func (server *Server) CreateTravel(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tid, err := auth.ExtractTokenID(r)
+	fmt.Fprintf(w, "TID: %d \n ", tid)
 	if err != nil {
+		fmt.Fprintf(w, "erro2 \n")
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
-	if tid != Travel.ID {
+	if tid == 0 {
+		fmt.Fprintf(w, "erro3")
 		responses.ERROR(w, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 		return
 	}
 	TravelCreated, err := Travel.SaveTravel(server.DB)
 	if err != nil {
+		fmt.Fprintf(w, "erro4")
 		formattedError := formaterror.FormatError(err.Error())
 		responses.ERROR(w, http.StatusInternalServerError, formattedError)
 		return
 	}
-	w.Header().Set("Lacation", fmt.Sprintf("%s%s/%d", r.Host, r.URL.Path, TravelCreated.ID))
+	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.URL.Path, TravelCreated.ID))
 	responses.JSON(w, http.StatusCreated, TravelCreated)
 }
 
