@@ -10,10 +10,10 @@ import (
 
 type Travel struct {
 	ID        			uint64    `gorm:"primary_key;auto_increment"`
+	DriverID				uint64		``
 	TravelledKm     float32   `json:"travelledkm"`
 	LiterSpent			float32		`json:"literSpent"`
 	PricePerLiter		float32		`json:"priceperliter"`
-	//DriverID
 	CheckoutDate		time.Time	`gorm:"default:CURRENT_TIMESTAMP" json:"checkout"`
 	CreatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
