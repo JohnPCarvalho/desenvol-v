@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"github.com/rs/cors"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql" //mysql database driver
 
@@ -36,6 +37,7 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 	server.DB.Debug().AutoMigrate(&models.User{}, &models.Travel{}, &models.Driver{}) //database migration
 
 	server.Router = mux.NewRouter()
+	cors.Default().Handler(server.Router)
 
 	server.initializeRoutes()
 }

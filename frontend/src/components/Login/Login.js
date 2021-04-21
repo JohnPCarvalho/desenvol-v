@@ -3,29 +3,27 @@ import PropTypes from 'prop-types'
 import './Login.css'
 import api from '../../api/api';
 
-async function loginUser(credentials) {
-  return fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
 
 export default function Login({ setToken }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const token = await loginUser({
-      email,
-      password
+  function handleSubmit(event) {
+    api.post('/login', {
+      user: {
+        email: email,
+        password: password
+      }
+    },
+    {withCredentials: true}
+    )
+    .then(response => {
+      console.log("res from login", response);
+    }).catch(error => {
+      console.log("login error: ", error)
     });
-    setToken(token);
+    event.preventDefault();
   }
 
   return (
