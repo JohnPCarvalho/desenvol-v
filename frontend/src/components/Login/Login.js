@@ -16,7 +16,7 @@ export default function Login({ setToken }) {
         password: password
       }
     },
-    {withCredentials: true}
+    {withCredentials: false}
     )
     .then(response => {
       console.log("res from login", response);
