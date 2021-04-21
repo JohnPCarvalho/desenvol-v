@@ -7,7 +7,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"github.com/rs/cors"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql" //mysql database driver
 
@@ -30,15 +29,13 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 			fmt.Printf("Cannot connect to %s database", Dbdriver)
 			log.Fatal("This is the error:", err)
 		} else {
-			fmt.Printf("We are connected to the %s database", Dbdriver)
+			fmt.Printf("We are connected to the %s database \n", Dbdriver)
 		}
 	}
 
 	server.DB.Debug().AutoMigrate(&models.User{}, &models.Travel{}, &models.Driver{}) //database migration
 
 	server.Router = mux.NewRouter()
-	cors.Default().Handler(server.Router)
-
 	server.initializeRoutes()
 }
 
