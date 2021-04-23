@@ -26,7 +26,7 @@ function App() {
           <Route path="/preferences">
             <Preferences />
           </Route>
-          <Route path="travels">
+          <Route path="/travels">
             <Travels />
           </Route>
         </Switch>
