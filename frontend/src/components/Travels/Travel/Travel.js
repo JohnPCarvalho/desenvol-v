@@ -3,7 +3,7 @@ import './Travel.css';
 
 const travel = (props) => {
   return (
-    <div>
+    <div className="Travel-Container">
       <p>{props.driver}</p>
       <p>{props.travelledkilometer} </p>
       <p>{props.literspent} </p>
