@@ -1,10 +1,10 @@
 .Travel-Container {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 60%;
+  justify-content: space-between;
+  width: 60%;  
   margin: 10px;
   padding: 2px 15px;
   background-color: #ccc;
   border-radius: 8px;
+  border: 1px solid black;
 }
