@@ -8,8 +8,12 @@ import Travel from  './Travel/Travel';
       super(props);
       this.handleAddition = this.handleAddition.bind(this);
       this.handleSubtraction = this.handleSubtraction.bind(this);
+
+      this.state = {
+        
+      }
+      
     }
-  
     //this wil render the list by mapping the array
     //therefore, the props of Travels component will be an array
 
@@ -31,8 +35,8 @@ import Travel from  './Travel/Travel';
             priceperliter="4.0" 
             literspent="1" 
             checkoutdate="25/12/1997" 
-            minus={() => this.handleSubtraction(this.props.key)}
-            plus={() =>this.handleAddition(this.props.key)}
+            minus={() => this.handleSubtraction()}
+            plus={() =>this.handleAddition()}
           />
           <Travel
             key={2}
