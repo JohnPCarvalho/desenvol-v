@@ -8,18 +8,67 @@ import Travel from  './Travel/Travel';
     //this wil render the list by mapping the array
     //therefore, the props of Travels component will be an array
 
+    function handleAddition (e) {
+      alert(e.target.value);
+    }
+
+    function handleSubtraction (e) {
+      alert(e.target.value);
+    }
+
   return (
     <div className="Travels-Container">  
-      <div className="Descriptions">
-        <p>Driver</p>
-        <p>Travelled Km</p>
-        <p>Liter spent</p>
-        <p>Checkout Date</p>
-      </div>
-      <Travel driver="Johnny" travelledkilometer="2.5" literspent="1" checkoutdate="25/12/1997" />
-      <Travel driver="Johnny" travelledkilometer="2.5" literspent="1" checkoutdate="25/12/1997" />
-      <Travel driver="Johnny" travelledkilometer="2.5" literspent="1" checkoutdate="25/12/1997" />
-      <Travel driver="Johnny" travelledkilometer="2.5" literspent="1" checkoutdate="25/12/1997" />
+      <Travel
+        key={1}
+        driver="Johnny" 
+        travelledkilometer="2.5" 
+        priceperliter="4.0" 
+        literspent="1" 
+        checkoutdate="25/12/1997" 
+        minus={handleSubtraction}
+        plus={handleAddition}
+      />
+      <Travel
+        key={2}
+        driver="Johnny" 
+        travelledkilometer="2.5" 
+        priceperliter="4.0" 
+        literspent="1" 
+        checkoutdate="25/12/1997" 
+        minus={handleSubtraction}
+        plus={handleAddition}
+      />
+      <Travel
+        key={3}
+        driver="Johnny" 
+        travelledkilometer="2.5" 
+        priceperliter="4.0" 
+        literspent="1" 
+        checkoutdate="25/12/1997" 
+        minus={handleSubtraction}
+        plus={handleAddition}
+      />
+      <Travel
+        key={4}
+        driver="Johnny" 
+        travelledkilometer="2.5" 
+        priceperliter="4.0" 
+        literspent="1" 
+        checkoutdate="25/12/1997" 
+        minus={handleSubtraction}
+        plus={handleAddition}
+      />
+      <Travel
+        key={5}
+        driver="Johnny" 
+        travelledkilometer="2.5" 
+        priceperliter="4.0" 
+        literspent="1" 
+        checkoutdate="25/12/1997" 
+        minus={handleSubtraction}
+        plus={handleAddition}
+      />
+
     </div>
   )
 }
