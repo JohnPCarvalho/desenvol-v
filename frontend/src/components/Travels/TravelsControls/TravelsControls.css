@@ -1,0 +1,17 @@
+.Buttons-Container {
+    display: flex;
+}
+
+.Plus-Button {
+    margin: 10px;
+    padding: 10px;
+    background-color: blue;
+    font-size: 1rem
+}
+
+.Minus-Button {
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+    font-size: 1rem;
+}
