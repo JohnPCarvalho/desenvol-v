@@ -1,76 +1,84 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Travels.css';
 
 import Travel from  './Travel/Travel';
   
-  const travels = (props) => {
+  class Travels extends Component {
+    constructor(props) {
+      super(props);
+      this.handleAddition = this.handleAddition.bind(this);
+      this.handleSubtraction = this.handleSubtraction.bind(this);
+    }
   
     //this wil render the list by mapping the array
     //therefore, the props of Travels component will be an array
 
-    function handleAddition (e) {
-      alert(e.target.value);
+    handleAddition (key) {
+      alert(key)
     }
 
-    function handleSubtraction (e) {
-      alert(e.target.value);
+    handleSubtraction (key) {
+      alert(key)
     }
 
-  return (
-    <div className="Travels-Container">  
-      <Travel
-        key={1}
-        driver="Johnny" 
-        travelledkilometer="2.5" 
-        priceperliter="4.0" 
-        literspent="1" 
-        checkoutdate="25/12/1997" 
-        minus={handleSubtraction}
-        plus={handleAddition}
-      />
-      <Travel
-        key={2}
-        driver="Johnny" 
-        travelledkilometer="2.5" 
-        priceperliter="4.0" 
-        literspent="1" 
-        checkoutdate="25/12/1997" 
-        minus={handleSubtraction}
-        plus={handleAddition}
-      />
-      <Travel
-        key={3}
-        driver="Johnny" 
-        travelledkilometer="2.5" 
-        priceperliter="4.0" 
-        literspent="1" 
-        checkoutdate="25/12/1997" 
-        minus={handleSubtraction}
-        plus={handleAddition}
-      />
-      <Travel
-        key={4}
-        driver="Johnny" 
-        travelledkilometer="2.5" 
-        priceperliter="4.0" 
-        literspent="1" 
-        checkoutdate="25/12/1997" 
-        minus={handleSubtraction}
-        plus={handleAddition}
-      />
-      <Travel
-        key={5}
-        driver="Johnny" 
-        travelledkilometer="2.5" 
-        priceperliter="4.0" 
-        literspent="1" 
-        checkoutdate="25/12/1997" 
-        minus={handleSubtraction}
-        plus={handleAddition}
-      />
-
-    </div>
-  )
+    render() {
+      return (
+        <div className="Travels-Container">  
+          <Travel
+            key={1}
+            driver="Johnny" 
+            travelledkilometer="2.5" 
+            priceperliter="4.0" 
+            literspent="1" 
+            checkoutdate="25/12/1997" 
+            minus={() => this.handleSubtraction(this.props.key)}
+            plus={() =>this.handleAddition(this.props.key)}
+          />
+          <Travel
+            key={2}
+            driver="Johnny" 
+            travelledkilometer="2.5" 
+            priceperliter="4.0" 
+            literspent="1" 
+            checkoutdate="25/12/1997" 
+            minus={this.handleSubtraction}
+            plus={this.handleAddition}
+          />
+          <Travel
+            key={3}
+            driver="Johnny" 
+            travelledkilometer="2.5" 
+            priceperliter="4.0" 
+            literspent="1" 
+            checkoutdate="25/12/1997" 
+            minus={this.handleSubtraction}
+            plus={this.handleAddition}
+          />
+          <Travel
+            key={4}
+            driver="Johnny" 
+            travelledkilometer="2.5" 
+            priceperliter="4.0" 
+            literspent="1" 
+            checkoutdate="25/12/1997" 
+            minus={this.handleSubtraction}
+            plus={this.handleAddition}
+          />
+          <Travel
+            key={5}
+            driver="Johnny" 
+            travelledkilometer="2.5" 
+            priceperliter="4.0" 
+            literspent="1" 
+            checkoutdate="25/12/1997" 
+            minus={this.handleSubtraction}
+            plus={this.handleAddition}
+          />
+    
+        </div>
+      )
+    }
+  
 }
 
-export default travels;
+export default Travels;
