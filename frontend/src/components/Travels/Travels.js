@@ -10,75 +10,71 @@ import Travel from  './Travel/Travel';
       this.handleSubtraction = this.handleSubtraction.bind(this);
 
       this.state = {
-        
+        users: [
+          {
+            id: 1,
+            driver: "Johnny",
+            travelledkilometer: 10.00,
+            priceperliter: 4.00,
+            literspent: 5,
+            checkoutdate: "26/12/1997"
+          },
+          {
+            id: 2,
+            driver: "Matheus",
+            travelledkilometer: 10.00,
+            priceperliter: 4.00,
+            literspent: 5,
+            checkoutdate: "26/12/1997"
+          },
+          {
+            id: 3,
+            driver: "Samuel",
+            travelledkilometer: 10.00,
+            priceperliter: 4.00,
+            literspent: 5,
+            checkoutdate: "26/12/1997"
+          },
+          {
+            id: 4,
+            driver: "Leonardo",
+            travelledkilometer: 10.00,
+            priceperliter: 4.00,
+            literspent: 5,
+            checkoutdate: "26/12/1997"
+          },
+        ]
       }
-      
     }
+
     //this wil render the list by mapping the array
     //therefore, the props of Travels component will be an array
 
     handleAddition (key) {
-      alert(key)
+      alert(key);
     }
 
     handleSubtraction (key) {
-      alert(key)
+      alert(key);
     }
 
     render() {
+
       return (
         <div className="Travels-Container">  
-          <Travel
-            key={1}
-            driver="Johnny" 
-            travelledkilometer="2.5" 
-            priceperliter="4.0" 
-            literspent="1" 
-            checkoutdate="25/12/1997" 
-            minus={() => this.handleSubtraction()}
-            plus={() =>this.handleAddition()}
-          />
-          <Travel
-            key={2}
-            driver="Johnny" 
-            travelledkilometer="2.5" 
-            priceperliter="4.0" 
-            literspent="1" 
-            checkoutdate="25/12/1997" 
-            minus={this.handleSubtraction}
-            plus={this.handleAddition}
-          />
-          <Travel
-            key={3}
-            driver="Johnny" 
-            travelledkilometer="2.5" 
-            priceperliter="4.0" 
-            literspent="1" 
-            checkoutdate="25/12/1997" 
-            minus={this.handleSubtraction}
-            plus={this.handleAddition}
-          />
-          <Travel
-            key={4}
-            driver="Johnny" 
-            travelledkilometer="2.5" 
-            priceperliter="4.0" 
-            literspent="1" 
-            checkoutdate="25/12/1997" 
-            minus={this.handleSubtraction}
-            plus={this.handleAddition}
-          />
-          <Travel
-            key={5}
-            driver="Johnny" 
-            travelledkilometer="2.5" 
-            priceperliter="4.0" 
-            literspent="1" 
-            checkoutdate="25/12/1997" 
-            minus={this.handleSubtraction}
-            plus={this.handleAddition}
-          />
-    
+          {
+            this.state.users ? 
+            this.state.users.map(user => {
+              return <Travel
+                        id={user.id} 
+                        driver={user.driver}  
+                        travelledkilometer={user.travelledkilometer}
+                        priceperliter={user.priceperliter}
+                        literspent={user.literspent}
+                        checkoutdate={user.checkoutdate}
+                      />
+            }) : <div> There is Nothing</div>
+          }
         </div>
       )
     }

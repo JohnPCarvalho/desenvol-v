@@ -1,6 +1,6 @@
 .Travel-Container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 60%;  
   margin: 10px;
   padding: 2px 15px;
