@@ -9,14 +9,14 @@ import (
 )
 
 type Travel struct {
-	ID        			uint64    `gorm:"primary_key;auto_increment"`
-	DriverID				uint64		
-	TravelledKm     float32   `json:"travelledkm"`
-	LiterSpent			float32		`json:"literSpent"`
-	PricePerLiter		float32		`json:"priceperliter"`
-	CheckoutDate		time.Time	`gorm:"default:CURRENT_TIMESTAMP" json:"checkout"`
-	CreatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt 			time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
+	ID            uint64 `gorm:"primary_key;auto_increment"`
+	DriverID      uint64
+	TravelledKm   float32   `json:"travelledkm"`
+	LiterSpent    float32   `json:"literSpent"`
+	PricePerLiter float32   `json:"priceperliter"`
+	CheckoutDate  time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"checkout"`
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
 func (t *Travel) Prepare() {
@@ -26,7 +26,7 @@ func (t *Travel) Prepare() {
 	t.UpdatedAt = time.Now()
 }
 
-func (t * Travel) Validate() error {
+func (t *Travel) Validate() error {
 
 	if t.TravelledKm == 0 {
 		return errors.New("required travelled km")
@@ -47,7 +47,7 @@ func (t * Travel) Validate() error {
 	return nil
 }
 
-func (t * Travel) SaveTravel(db *gorm.DB) (*Travel, error) {
+func (t *Travel) SaveTravel(db *gorm.DB) (*Travel, error) {
 	var err error
 	err = db.Debug().Model(&Travel{}).Create(&t).Error
 	fmt.Print("Tentou criar \n")
