@@ -50,12 +50,12 @@ import Travel from  './Travel/Travel';
     //this wil render the list by mapping the array
     //therefore, the props of Travels component will be an array
 
-    handleAddition (key) {
-      alert(key);
+    handleAddition (id) {
+      alert(id);
     }
 
-    handleSubtraction (key) {
-      alert(key);
+    handleSubtraction (id) {
+      alert(id);
     }
 
     render() {
@@ -67,11 +67,14 @@ import Travel from  './Travel/Travel';
             this.state.users.map(user => {
               return <Travel
                         id={user.id} 
+                        key={user.id+1}
                         driver={user.driver}  
                         travelledkilometer={user.travelledkilometer}
                         priceperliter={user.priceperliter}
                         literspent={user.literspent}
                         checkoutdate={user.checkoutdate}
+                        plus={() =>  this.handleAddition(user.id)}
+                        minus={() => this.handleSubtraction(user.id)}
                       />
             }) : <div> There is Nothing</div>
           }
