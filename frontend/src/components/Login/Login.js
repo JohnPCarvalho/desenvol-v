@@ -10,12 +10,11 @@ export default function Login({ setToken }) {
   const [password, setPassword] = useState('');
 
   function handleSubmit(event) {
-    api.post('/login', {
-      user: {
+    api.post('/login', 
+      {
         email: email,
         password: password
-      }
-    },
+      },
     {withCredentials: false}
     )
     .then(response => {
@@ -24,6 +23,7 @@ export default function Login({ setToken }) {
       console.log("login error: ", error)
     });
     event.preventDefault();
+    
   }
 
   return (

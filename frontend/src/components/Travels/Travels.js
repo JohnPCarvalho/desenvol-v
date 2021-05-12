@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import './Travels.css';
+import {UserContext} from '../../contexts/UserContext';
 
 import Travel from  './Travel/Travel';
   
   class Travels extends Component {
+
+    static msg = useContext(UserContext);
+
     constructor(props) {
       super(props);
       this.handleAddition = this.handleAddition.bind(this);
@@ -51,11 +55,11 @@ import Travel from  './Travel/Travel';
     //therefore, the props of Travels component will be an array
 
     handleAddition (id) {
-      alert(id);
+      //alert(id);
     }
 
     handleSubtraction (id) {
-      alert(id);
+      //alert(id);
     }
 
     render() {
@@ -78,6 +82,9 @@ import Travel from  './Travel/Travel';
                       />
             }) : <div> There is Nothing</div>
           }
+          <div>
+            {msg}
+          </div>
         </div>
       )
     }
