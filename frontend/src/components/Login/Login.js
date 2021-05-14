@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types'
 import './Login.css'
 import api from '../../api/api';
+import { Context } from '../../Context/AuthContext';
 
 
 export default function Login({ setToken }) {
+
+  const authenticated = useContext(Context);
+  console.debug('Login', authenticated)
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -1,12 +1,9 @@
 import React, { Component, useContext } from 'react';
 import './Travels.css';
-import {UserContext} from '../../contexts/UserContext';
 
 import Travel from  './Travel/Travel';
   
   class Travels extends Component {
-
-    static msg = useContext(UserContext);
 
     constructor(props) {
       super(props);
@@ -82,9 +79,6 @@ import Travel from  './Travel/Travel';
                       />
             }) : <div> There is Nothing</div>
           }
-          <div>
-            {msg}
-          </div>
         </div>
       )
     }

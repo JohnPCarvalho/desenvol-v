@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Preferences from './components/Preferences/Preferences';
 import Travels from './components/Travels/Travels';
-import { UserContext } from './contexts/UserContext';
+import { AuthProvider } from  '../src/Context/AuthContext';
 
 function App() {
   
@@ -17,10 +17,10 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
+    <AuthProvider>
+      <div className="wrapper">
       <h1>Desenvol-v</h1>
       <BrowserRouter>
-        <UserContext.Provider value="hello from context">
           <Switch>
             <Route path="/dashboard">
               <Dashboard />
@@ -32,9 +32,9 @@ function App() {
               <Travels />
             </Route>
           </Switch>
-        </UserContext.Provider>
       </BrowserRouter>
-    </div>
+      </div>
+    </AuthProvider>
   );
 }
 
