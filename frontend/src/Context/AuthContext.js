@@ -20,4 +20,4 @@ function AuthProvider({ children }) {
     )
 }
 
-export { Context, AuthProvider }
+export { Context, AuthProvider };

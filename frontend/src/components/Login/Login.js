@@ -7,7 +7,7 @@ import { Context } from '../../Context/AuthContext';
 
 export default function Login({ setToken }) {
 
-  const authenticated = useContext(Context);
+  const { authenticated, handleLogin } = useContext(Context);
   console.debug('Login', authenticated)
 
   const [email, setEmail] = useState('');
